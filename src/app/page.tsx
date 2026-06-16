@@ -179,21 +179,67 @@ export default function ShowcasePage() {
           </div>
         </div>
 
-        {/* 타이포그래피 */}
-        <Section title="타이포그래피" description="일관된 계층 구조의 텍스트 스타일">
-          <div className="space-y-3 rounded-lg border p-6">
-            <h1 className="!mt-0">H1 — 페이지 제목</h1>
-            <h2 className="!mt-0">H2 — 섹션 제목</h2>
-            <h3 className="!mt-0">H3 — 서브 섹션</h3>
-            <h4 className="!mt-0">H4 — 카드 제목</h4>
-            <p className="!mt-0">
-              본문 텍스트입니다. <code>code</code> 인라인 코드와{" "}
-              <strong>굵은 글씨</strong>, <em>이탤릭</em>을 지원합니다.
-            </p>
-            <blockquote className="!mt-3">
-              훌륭한 소프트웨어는 사용자가 눈치채지 못할 때 가장 잘 작동합니다.
-            </blockquote>
-          </div>
+        {/* Tier 1: 기초 요소 */}
+        <Section title="Tier 1 — 기초 요소" description="UI의 최소 단위 — 버튼, 배지, 아이콘, 색상 팔레트">
+
+          <Row label="Button Variant">
+            <Button>Default</Button>
+            <Button variant="secondary">Secondary</Button>
+            <Button variant="outline">Outline</Button>
+            <Button variant="ghost">Ghost</Button>
+            <Button variant="destructive">Destructive</Button>
+            <Button variant="link">Link</Button>
+          </Row>
+
+          <Row label="Button Size">
+            <Button size="lg">Large</Button>
+            <Button size="default">Default</Button>
+            <Button size="sm">Small</Button>
+            <Button size="icon">
+              <Star className="h-4 w-4" />
+            </Button>
+            <Button disabled>비활성</Button>
+          </Row>
+
+          <Row label="Badge">
+            <Badge>기본</Badge>
+            <Badge variant="secondary">보조</Badge>
+            <Badge variant="destructive">삭제</Badge>
+            <Badge variant="outline">아웃라인</Badge>
+            <Badge className="gap-1">
+              <Star className="h-3 w-3" /> 추천
+            </Badge>
+          </Row>
+
+          <Row label="아이콘 (lucide-react)">
+            {[Rocket, Star, Bell, Download, Trash2, CheckCircle, AlertCircle, Info, Sun, Moon, Monitor].map(
+              (Icon, i) => (
+                <div key={i} className="flex h-8 w-8 items-center justify-center rounded-md border">
+                  <Icon className="h-4 w-4 text-muted-foreground" />
+                </div>
+              )
+            )}
+          </Row>
+
+          <Row label="색상 팔레트">
+            <div className="grid w-full grid-cols-4 gap-2 sm:grid-cols-8">
+              {[
+                { cls: "bg-primary", label: "primary" },
+                { cls: "bg-secondary", label: "secondary" },
+                { cls: "bg-destructive", label: "destructive" },
+                { cls: "bg-muted", label: "muted" },
+                { cls: "bg-accent", label: "accent" },
+                { cls: "bg-card", label: "card" },
+                { cls: "bg-background border", label: "background" },
+                { cls: "bg-foreground", label: "foreground" },
+              ].map(({ cls, label }) => (
+                <div key={label} className="space-y-1 text-center">
+                  <div className={`${cls} h-10 rounded-md`} />
+                  <p className="font-mono text-[10px] text-muted-foreground">{label}</p>
+                </div>
+              ))}
+            </div>
+          </Row>
         </Section>
 
         {/* Tier 2: 피드백 */}
@@ -379,16 +425,6 @@ export default function ShowcasePage() {
         {/* Tier 4: 표시 */}
         <Section title="Tier 4 — 표시" description="정보를 보여주는 컨테이너">
 
-          <Row label="Badge">
-            <Badge>기본</Badge>
-            <Badge variant="secondary">보조</Badge>
-            <Badge variant="destructive">삭제</Badge>
-            <Badge variant="outline">아웃라인</Badge>
-            <Badge className="gap-1">
-              <Star className="h-3 w-3" /> 추천
-            </Badge>
-          </Row>
-
           <Row label="Avatar">
             <Avatar className="h-8 w-8">
               <AvatarImage src="/placeholder.jpg" />
@@ -402,105 +438,113 @@ export default function ShowcasePage() {
             </Avatar>
           </Row>
 
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-            {[
-              { label: "총 사용자", value: "2,847", delta: "+12.5%" },
-              { label: "월 매출", value: "₩4.2M", delta: "+8.3%" },
-              { label: "활성 세션", value: "142", delta: "현재 온라인" },
-            ].map((stat) => (
-              <Card key={stat.label}>
-                <CardHeader className="pb-2">
-                  <CardDescription>{stat.label}</CardDescription>
-                  <CardTitle className="text-3xl">{stat.value}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-xs text-muted-foreground !mt-0">{stat.delta}</p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
+          <Row label="Stat Card">
+            <div className="grid w-full grid-cols-1 gap-4 sm:grid-cols-3">
+              {[
+                { label: "총 사용자", value: "2,847", delta: "+12.5%" },
+                { label: "월 매출", value: "₩4.2M", delta: "+8.3%" },
+                { label: "활성 세션", value: "142", delta: "현재 온라인" },
+              ].map((stat) => (
+                <Card key={stat.label}>
+                  <CardHeader className="pb-2">
+                    <CardDescription>{stat.label}</CardDescription>
+                    <CardTitle className="text-3xl">{stat.value}</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-xs text-muted-foreground !mt-0">{stat.delta}</p>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </Row>
 
-          <Tabs defaultValue="all">
-            <TabsList>
-              <TabsTrigger value="all">전체</TabsTrigger>
-              <TabsTrigger value="active">활성</TabsTrigger>
-              <TabsTrigger value="inactive">비활성</TabsTrigger>
-            </TabsList>
-            <TabsContent value="all">
-              <Table>
-                <TableCaption>사용자 목록</TableCaption>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead>이름</TableHead>
-                    <TableHead>이메일</TableHead>
-                    <TableHead>역할</TableHead>
-                    <TableHead>상태</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {TABLE_DATA.map((row) => (
-                    <TableRow key={row.id}>
-                      <TableCell className="font-medium">
-                        <div className="flex items-center gap-2">
-                          <Avatar className="h-7 w-7">
-                            <AvatarFallback className="text-xs">
-                              {row.name[0]}
-                            </AvatarFallback>
-                          </Avatar>
-                          {row.name}
-                        </div>
-                      </TableCell>
-                      <TableCell className="text-muted-foreground">
-                        {row.email}
-                      </TableCell>
-                      <TableCell>{row.role}</TableCell>
-                      <TableCell>
-                        <Badge
-                          variant={row.status === "활성" ? "default" : "secondary"}
-                        >
-                          {row.status}
-                        </Badge>
-                      </TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </TabsContent>
-            <TabsContent value="active">
-              <p className="py-4 text-sm text-muted-foreground">
-                활성 사용자만 표시됩니다.
-              </p>
-            </TabsContent>
-            <TabsContent value="inactive">
-              <p className="py-4 text-sm text-muted-foreground">
-                비활성 사용자만 표시됩니다.
-              </p>
-            </TabsContent>
-          </Tabs>
+          <Row label="Tabs + Table">
+            <div className="w-full">
+              <Tabs defaultValue="all">
+                <TabsList>
+                  <TabsTrigger value="all">전체</TabsTrigger>
+                  <TabsTrigger value="active">활성</TabsTrigger>
+                  <TabsTrigger value="inactive">비활성</TabsTrigger>
+                </TabsList>
+                <TabsContent value="all">
+                  <Table>
+                    <TableCaption>사용자 목록</TableCaption>
+                    <TableHeader>
+                      <TableRow>
+                        <TableHead>이름</TableHead>
+                        <TableHead>이메일</TableHead>
+                        <TableHead>역할</TableHead>
+                        <TableHead>상태</TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      {TABLE_DATA.map((row) => (
+                        <TableRow key={row.id}>
+                          <TableCell className="font-medium">
+                            <div className="flex items-center gap-2">
+                              <Avatar className="h-7 w-7">
+                                <AvatarFallback className="text-xs">
+                                  {row.name[0]}
+                                </AvatarFallback>
+                              </Avatar>
+                              {row.name}
+                            </div>
+                          </TableCell>
+                          <TableCell className="text-muted-foreground">
+                            {row.email}
+                          </TableCell>
+                          <TableCell>{row.role}</TableCell>
+                          <TableCell>
+                            <Badge
+                              variant={row.status === "활성" ? "default" : "secondary"}
+                            >
+                              {row.status}
+                            </Badge>
+                          </TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </TabsContent>
+                <TabsContent value="active">
+                  <p className="py-4 text-sm text-muted-foreground">
+                    활성 사용자만 표시됩니다.
+                  </p>
+                </TabsContent>
+                <TabsContent value="inactive">
+                  <p className="py-4 text-sm text-muted-foreground">
+                    비활성 사용자만 표시됩니다.
+                  </p>
+                </TabsContent>
+              </Tabs>
+            </div>
+          </Row>
 
-          <Accordion type="single" collapsible className="w-full">
-            <AccordionItem value="item-1">
-              <AccordionTrigger>이 스타터킷에 포함된 것은 무엇인가요?</AccordionTrigger>
-              <AccordionContent>
-                Next.js 15 App Router, TypeScript, TailwindCSS v4, ShadcnUI 컴포넌트,
-                레이아웃 시스템, 다크모드, 폼·알림 라이브러리가 포함되어 있습니다.
-              </AccordionContent>
-            </AccordionItem>
-            <AccordionItem value="item-2">
-              <AccordionTrigger>다크모드는 어떻게 동작하나요?</AccordionTrigger>
-              <AccordionContent>
-                next-themes 라이브러리로 라이트·다크·시스템 모드를 지원합니다.
-                헤더 우측의 테마 버튼으로 전환할 수 있습니다.
-              </AccordionContent>
-            </AccordionItem>
-            <AccordionItem value="item-3">
-              <AccordionTrigger>추가 컴포넌트는 어떻게 설치하나요?</AccordionTrigger>
-              <AccordionContent>
-                <code>npx shadcn add [컴포넌트명]</code> 명령어로 필요한 컴포넌트를
-                추가할 수 있습니다.
-              </AccordionContent>
-            </AccordionItem>
-          </Accordion>
+          <Row label="Accordion">
+            <Accordion type="single" collapsible className="w-full">
+              <AccordionItem value="item-1">
+                <AccordionTrigger>이 스타터킷에 포함된 것은 무엇인가요?</AccordionTrigger>
+                <AccordionContent>
+                  Next.js 15 App Router, TypeScript, TailwindCSS v4, ShadcnUI 컴포넌트,
+                  레이아웃 시스템, 다크모드, 폼·알림 라이브러리가 포함되어 있습니다.
+                </AccordionContent>
+              </AccordionItem>
+              <AccordionItem value="item-2">
+                <AccordionTrigger>다크모드는 어떻게 동작하나요?</AccordionTrigger>
+                <AccordionContent>
+                  next-themes 라이브러리로 라이트·다크·시스템 모드를 지원합니다.
+                  헤더 우측의 테마 버튼으로 전환할 수 있습니다.
+                </AccordionContent>
+              </AccordionItem>
+              <AccordionItem value="item-3">
+                <AccordionTrigger>추가 컴포넌트는 어떻게 설치하나요?</AccordionTrigger>
+                <AccordionContent>
+                  <code>npx shadcn add [컴포넌트명]</code> 명령어로 필요한 컴포넌트를
+                  추가할 수 있습니다.
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>
+          </Row>
         </Section>
 
         {/* Tier 5: 네비게이션 */}
@@ -580,7 +624,7 @@ export default function ShowcasePage() {
           title="다크모드 테마"
           description="라이트 · 다크 · 시스템 모드를 지원합니다"
         >
-          <div className="flex flex-wrap gap-3">
+          <Row label="테마 전환">
             <Button
               variant="outline"
               className="gap-2"
@@ -614,45 +658,20 @@ export default function ShowcasePage() {
               <Monitor className="h-4 w-4" />
               시스템
             </Button>
-          </div>
-          <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
-            {[
-              "bg-background",
-              "bg-card",
-              "bg-primary",
-              "bg-muted",
-            ].map((cls) => (
-              <div key={cls} className={`${cls} rounded-lg border p-4 text-center`}>
-                <p className="font-mono text-xs text-muted-foreground">{cls}</p>
-              </div>
-            ))}
-          </div>
-        </Section>
-
-        {/* 버튼 시스템 */}
-        <Section title="버튼 시스템" description="모든 variant와 size">
-          <Row label="Variant">
-            <Button>Default</Button>
-            <Button variant="secondary">Secondary</Button>
-            <Button variant="outline">Outline</Button>
-            <Button variant="ghost">Ghost</Button>
-            <Button variant="destructive">Destructive</Button>
-            <Button variant="link">Link</Button>
           </Row>
-          <Row label="Size">
-            <Button size="lg">Large</Button>
-            <Button size="default">Default</Button>
-            <Button size="sm">Small</Button>
-            <Button size="icon">
-              <Star className="h-4 w-4" />
-            </Button>
-          </Row>
-          <Row label="상태">
-            <Button disabled>비활성</Button>
-            <Button className="gap-2">
-              <Rocket className="h-4 w-4" />
-              아이콘 버튼
-            </Button>
+          <Row label="토큰 미리보기">
+            <div className="grid w-full grid-cols-2 gap-4 sm:grid-cols-4">
+              {[
+                "bg-background",
+                "bg-card",
+                "bg-primary",
+                "bg-muted",
+              ].map((cls) => (
+                <div key={cls} className={`${cls} rounded-lg border p-4 text-center`}>
+                  <p className="font-mono text-xs text-muted-foreground">{cls}</p>
+                </div>
+              ))}
+            </div>
           </Row>
         </Section>
 
