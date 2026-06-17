@@ -21,7 +21,6 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { MobileSidebar } from "./sidebar";
 import { NAV_ITEMS } from "./nav-items";
 
@@ -42,16 +41,11 @@ function ThemeToggle() {
 
   return (
     <DropdownMenu>
-      <Tooltip>
-        <TooltipTrigger asChild>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" size="icon" aria-label="테마 변경">
-              {mounted && <CurrentIcon className="h-4 w-4" />}
-            </Button>
-          </DropdownMenuTrigger>
-        </TooltipTrigger>
-        <TooltipContent>테마 변경</TooltipContent>
-      </Tooltip>
+      <DropdownMenuTrigger asChild>
+        <Button variant="ghost" size="icon" aria-label="테마 변경">
+          {mounted && <CurrentIcon className="h-4 w-4" />}
+        </Button>
+      </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
         {themes.map(({ value, label, icon: Icon }) => (
           <DropdownMenuItem

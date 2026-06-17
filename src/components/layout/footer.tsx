@@ -1,5 +1,7 @@
 import { Separator } from "@/components/ui/separator";
 
+export const dynamic = "force-dynamic";
+
 export function Footer() {
   const currentYear = new Date().getFullYear();
 
