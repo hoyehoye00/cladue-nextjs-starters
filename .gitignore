@@ -1,5 +1,11 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
+# Claude Code 환경설정 (Slack Webhook URL 등 민감정보)
+.claude/.env
+
+# Claude Code 로컬 로그 (명령어 실행 기록)
+.claude/logs/
+
 # dependencies
 /node_modules
 /.pnp
