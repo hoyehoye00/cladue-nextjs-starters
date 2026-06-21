@@ -1,0 +1,55 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash",
+      "WebSearch",
+      "WebFetch",
+      "mcp__playwright"
+    ]
+  },
+  "enabledMcpjsonServers": [
+    "playwright",
+    "context7",
+    "sequential-thinking",
+    "shadcn",
+    "google-maps",
+    "kis-trade-mcp"
+  ],
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash /Users/hoyeon/workspace/courses/cladue-nextjs-starters/.claude/hooks/notify-stop.sh",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "Notification": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash /Users/hoyeon/workspace/courses/cladue-nextjs-starters/.claude/hooks/notify-permission.sh",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash /Users/hoyeon/workspace/courses/cladue-nextjs-starters/.claude/hooks/log-command.sh",
+            "timeout": 5
+          }
+        ]
+      }
+    ]
+  }
+}
